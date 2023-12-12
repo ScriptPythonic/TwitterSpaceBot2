@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Space Data</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+    <nav class="bg-blue-500 p-4">
+        <div class="container mx-auto text-white">
+            <p class="text-2xl">Twitter Space Data</p>
+        </div>
+    </nav>
+
+    <div class="container mx-auto mt-8 max-w-md">
+
+        <form id="searchForm" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert">
+                <p>{{ message }}</p>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="searchValue">
+                    Twitter Space ID/Space Title
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="searchValue" type="text" placeholder="Enter Twitter Space ID/Title" name="spaceID">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2">
+                    Search By
+                </label>
+                <input type="radio" id="searchById" name="searchOption" value="SpaceIds" class="mr-1" checked>
+                <label for="searchById" class="mr-4">Space Ids</label>
+                <input type="radio" id="searchByTitle" name="searchOption" value="SpaceTitle" class="mr-1">
+                <label for="searchByTitle">Space Title</label>
+            </div>
+
+            <div class="flex items-center justify-between">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" id="submitButton">
+                    Search
+                </button>
+            </div>
+        </form>
+
+    </div>
+
+    <script>
+        document.getElementById('submitButton').addEventListener('click', function () {
+            var form = document.getElementById('searchForm');
+            var spaceOption = document.querySelector('input[name="searchOption"]:checked').value;
+
+            // Modify the form action based on the selected radio button
+            if (spaceOption === 'SpaceIds') {
+                form.action = '/';
+            } else if (spaceOption === 'SpaceTitle') {
+                form.action = '/hi';
+            }
+
+            // Submit the form
+            form.submit();
+        });
+    </script>
+
+</body>
+
+</html>

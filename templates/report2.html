@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+
+        <div class="flex items-center justify-between">
+            <a href="/"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+                Back
+            </a>
+        </div>
+        </div>
+        <div class="container flex items-end justify-between mx-auto mt-8 w-full" id="allDataDownloadSection">
+            <div class="w-max h-max">
+                <h2 class="text-lg font-semibold mb-4">Download All Data</h2>
+                <a href="{{ url_for('download_files') }}" download="space_user_data.json" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-2">
+                    Download JSON
+                </a>
+            </div>
+
+            <div class="w-max h-max">
+                <a href="{{ url_for('spreadsheets') }}"  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2">
+                   UPLOAD TO SHEET
+                </a>
+            </div>
+        </div>
+
+
+        </div>
+
+
+        <div class="container mx-auto mt-8 max-w-xlg" id="spaceDataSection" style="display:block" >
+        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <h2 class="text-lg font-semibold mb-4">Space Data</h2>
+            <a href="{{ url_for('download_spaceCsv') }}"  id="downloadUserCsvBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2" >
+                Download CSV
+            </a>
+            <a href="{{ url_for('download_space') }}" download="space_user_data.json" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-2">
+                Download JSON
+            </a>
+            <table class="table-auto w-full">
+                <thead>
+                <tr>
+                    <th class="px-4 py-2">Space Id</th>
+                    <th class="px-4 py-2">Space State</th>
+                    <th class="px-4 py-2">Created At</th>
+                    <th class="px-4 py-2">Ended At</th>
+                    <th class="px-4 py-2">Host Ids</th>
+                    <th class="px-4 py-2">Language</th>
+                    <th class="px-4 py-2" >Invited User Ids</th>
+                    <th class="px-4 py-2">Participant Count</th>
+                    <th class="px-4 py-2">Subsciber Count</th>
+                    <th class="px-4 py-2">Scheduled Start</th>
+                    <th class="px-4 py-2">Started At</th>
+                    <th class="px-4 py-2">Space Title</th>
+                    <th class="px-4 py-2">Topics Ids</th>
+                    <th class="px-4 py-2">Topics Names</th>
+                    <th class="px-4 py-2">Topics Description</th>
+                    <th class="px-4 py-2">Updated At</th>
+                    <th class="px-4 py-2">Speakers Ids</th>
+                    <th class="px-4 py-2">Total Speakers</th>
+                    <th class="px-4 py-2">Total Moderators</th>
+                </tr>
+                </thead>
+                <tbody id="spaceDataBody">
+                </tbody>
+            </table>
+        </div>
+        </div>
+
+
+        <div class="container mx-auto mt-8 max-w-xlg" id="userDataSection" style="display:block" >
+        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <h2 class="text-lg font-semibold mb-4">User Data</h2>
+            <a href="{{ url_for('download_space_userCsv') }}"  id="downloadUserCsvBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-2" >
+                Download CSV
+            </a>
+            <a href="{{ url_for('download_space_user') }}" download="space_user_data.json" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-2">
+                Download JSON
+            </a>
+            <div id="counter" class="text-center font-bold">
+
+            </div>
+
+            <table class="table-auto w-full">
+                <thead>
+                <tr>
+                    <th class="px-4 py-2">User ID</th>
+                    <th class="px-4 py-2">Name</th>
+                    <th class="px-4 py-2">Username</th>
+                    <th class="px-4 py-2" style="width:10%">Description</th>
+                    <th class="px-4 py-2">Created At</th>
+                    <th class="px-4 py-2" style="width:10%">Location</th>
+                    <th class="px-4 py-2">Protected</th>
+                    <th class="px-4 py-2">Followers #</th>
+                    <th class="px-4 py-2">Following #</th>
+                    <th class="px-4 py-2">Tweet #</th>
+                    <th class="px-4 py-2">Topic Domain</th>
+                </tr>
+                </thead>
+                <tbody id="userDataBody">
+                </tbody>
+            </table>
+        </div>
+        </div>
+
+        <script>
+            // Fetch space data
+fetch('/get_space_data')
+.then(response => response.json())
+.then(spaceData => {
+    // Display space data in the table
+    const spaceDataBody = document.getElementById('spaceDataBody');
+    const row = document.createElement('tr');
+
+    row.innerHTML = `
+        <td class="px-4 py-2">${spaceData.id || 'N/A'}</td>
+        <td class="px-4 py-2">${spaceData.state || 'N/A'}</td>
+        <td class="px-4 py-2">${spaceData.created_at || 'N/A'}</td>
+        <td class="px-4 py-2">${spaceData.ended_at || 'N/A'}</td>
+        <td class="px-4 py-2">${spaceData.host_ids || 'N/A'}</td>
+        <td class="px-4 py-2">${spaceData.lang || 'N/A'}</td>
+        <td class="px-4 py-2">${spaceData.invited_user_ids || 'N/A'}</td>
+        <td class="px-4 py-2">${spaceData.participant_count || 'N/A'}</td>
+        <td class="px-4 py-2">${spaceData.participant_count || 'N/A'}</td>
+        <td class="px-4 py-2">${spaceData.scheduled_start || 'N/A'}</td>
+        <td class="px-4 py-2">${spaceData.started_at || 'N/A'}</td>
+        <td class="px-4 py-2">${spaceData.title || 'N/A'}</td>
+        <td class="px-4 py-2">${spaceData.topic_ids || 'N/A'}</td>
+        <td class="px-4 py-2">${spaceData.topic_name || 'N/A'}</td>
+        <td class="px-4 py-2">${spaceData.topic_des || 'N/A'}</td>
+        <td class="px-4 py-2">${spaceData.updated_at || 'N/A'}</td>
+        <td class="px-4 py-2">${spaceData.speakers || 'N/A'}</td>
+        <td class="px-4 py-2">${spaceData.speakersn || 'N/A'}</td>
+        <td class="px-4 py-2">${spaceData.speakersn || 'N/A'}</td>
+    `;
+    spaceDataBody.appendChild(row);
+})
+.catch(error => console.error('Error fetching space data:', error));
+
+// Fetch user data
+fetch('/get_space_user_data')
+.then(response => response.json())
+.then(userData => {
+    // Display user data in the table
+    const userDataBody = document.getElementById('userDataBody');
+
+    userData.forEach(user => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td class="px-4 py-2">${user.id || 'N/A'}</td>
+            <td class="px-4 py-2">${user.name || 'N/A'}</td>
+            <td class="px-4 py-2">${user.username || 'N/A'}</td>
+            <td class="px-4 py-2" style="width:10%">${user.description || 'N/A'}</td>
+            <td class="px-4 py-2">${user.created_at || 'N/A'}</td>
+            <td class="px-4 py-2" style="width:10%">${user.location || 'N/A'}</td>
+            <td class="px-4 py-2">${user.protected ? 'Yes' : 'No'}</td>
+            <td class="px-4 py-2">${user.public_metrics.followers_count || 'N/A'}</td>
+            <td class="px-4 py-2">${user.public_metrics.following_count || 'N/A'}</td>
+            <td class="px-4 py-2">${user.public_metrics.tweet_count || 'N/A'}</td>
+            <td class="px-4 py-2">${user.entities.url ? user.entities.url.urls[0]?.display_url || 'N/A' : 'N/A'}</td>
+        `;
+        userDataBody.appendChild(row);
+
+        // Fetch and display tweets and annotations
+        fetch('/get_tweets')  // Replace with the appropriate route to fetch tweets
+            .then(response => response.json())
+            .then(tweetsData => {
+                // Assuming tweetsData is an object with user IDs as keys and tweet arrays as values
+                const userTweets = tweetsData[user.id] || [];
+
+                // Display relevant tweet information
+                userTweets.forEach(tweet => {
+                    const tweetRow = document.createElement('tr');
+                    tweetRow.innerHTML = `
+                        <td class="px-4 py-2">Tweet ID: ${tweet.id}</td>
+                        <td class="px-4 py-2">Context Annotations: ${JSON.stringify(tweet.context_annotations)}</td>
+                        <!-- Add more fields as needed -->
+                    `;
+                    userDataBody.appendChild(tweetRow);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching tweets:', error);
+            });
+    });
+})
+.catch(error => console.error('Error fetching user data:', error));
+
+        </script>
+
+</body>
+</html>

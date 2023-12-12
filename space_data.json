@@ -1,0 +1,64 @@
+{
+   "created_at": "2023-12-11T19:43:59.000Z",
+   "participant_count": 642,
+   "started_at": "2023-12-12T14:49:52.000Z",
+   "updated_at": "2023-12-12T15:26:15.000Z",
+   "lang": "en",
+   "state": "live",
+   "invited_user_ids": [
+      "1362970907505954817",
+      "1519312712857272323"
+   ],
+   "id": "1lPKqbPeLyQGb",
+   "topic_ids": [
+      "913142676819648512",
+      "1369311988040355840",
+      "847894353708068864"
+   ],
+   "title": "NFTs - The Next Billion in Liquidity?\ud83c\udf99",
+   "speaker_ids": [
+      "928367549724622850",
+      "1455894203364519943",
+      "708081216",
+      "1438287921933688832",
+      "263486773",
+      "1362970907505954817",
+      "2648873303",
+      "537563949",
+      "1519312712857272323"
+   ],
+   "creator_id": "44687046",
+   "host_ids": [
+      "44687046",
+      "2648873303",
+      "708081216"
+   ],
+   "scheduled_start": "2023-12-12T15:00:00.000Z",
+   "Space Title": "NFTs - The Next Billion in Liquidity?\ud83c\udf99",
+   "Topics Ids": "913142676819648512, 1369311988040355840, 847894353708068864",
+   "topic_name": [
+      "Cryptocurrencies",
+      "NFTs",
+      "Investing"
+   ],
+   "topic_des": [
+      "Business & finance",
+      "Digital assets",
+      "Business & finance"
+   ],
+   "Space State": "live",
+   "Host ID": [
+      "44687046",
+      "2648873303",
+      "708081216"
+   ],
+   "Creator ID": "44687046",
+   "Updated At": "2023-12-12T15:26:15.000Z",
+   "speakers": "928367549724622850, 1455894203364519943, 708081216, 1438287921933688832, 263486773, 1362970907505954817, 2648873303, 537563949, 1519312712857272323",
+   "speakersn": 9,
+   "Total Moderators": 9,
+   "Created At": "2023-12-11T19:43:59.000Z",
+   "Ended At": "",
+   "Language": "en",
+   "Subscriber Count": 642
+}
