@@ -11,6 +11,10 @@ import gspread
 from flask import Flask, render_template, request, redirect, jsonify, send_file, flash, Blueprint
 from apscheduler.schedulers.background import BackgroundScheduler
 from oauth2client.service_account import ServiceAccountCredentials
+from dotenv import load_dotenv
+
+# Load environment variables from the .env file
+load_dotenv()
 
 # Creator: Quadri Basit Ayomide
 # Email: basit@example.com
@@ -20,8 +24,7 @@ load = Flask(__name__)
 load.secret_key = 'Quadri Basit Ayomide'
 
 # Twitter API Bearer Token
-bearer_token = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-
+bearer_token = os.getenv("BEARER_TOKEN")
 # Scheduler setup
 scheduler = BackgroundScheduler()
 scheduler.start()
